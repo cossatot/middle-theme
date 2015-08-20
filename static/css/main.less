@@ -1,10 +1,12 @@
 @text-color: #222;
-@link-color: #007EE5;
+@link-color: #bc0031;
+@header-color: #333;
+@muted-color: #aaa;
 
 body {
     margin: 0;
     padding: 0;
-    font: 15px 'Source Sans Pro', sans-serif;
+    font: 15px 'Source-Sans-Pro', sans-serif;
     line-height: 1.6em;
     color: @text-color;
     text-rendering: optimizeLegibility;
@@ -22,7 +24,7 @@ a:hover {
 }
 
 header.main-header {
-    background: none repeat scroll 0% 0% #2A66C0;
+    background: none repeat scroll 0% 0% @header-color;
 
     a {
         color: #fff;
@@ -33,7 +35,7 @@ header.main-header {
 
         nav {
             a:hover {
-                background-color: #2A66C0;
+                background-color: @header-color;
             }
         }
     }
@@ -53,9 +55,9 @@ article {
         }
 
         time {
-            color: #9E9E9E;
+            color: @muted-color;
             font-size: 0.85em;
-            float: right;
+            text-align: center;
         }
     }
 
@@ -81,7 +83,7 @@ article {
 
     blockquote {
         border-left: 2px solid #c7c7cc;
-        color: #666;
+        color: @muted-color;
         margin: 30px 0;
         padding: 0 0 0 25px;
     }
@@ -125,27 +127,27 @@ article {
             text-transform: uppercase;
             font-weight: 800;
             font-size: 11px;
-            color: #BBB;
-            border: 1px solid #BBB;
+            color: @muted-color;
+            border: 1px solid #bbb;
         }
 
         a.tag:hover {
-            background: #BBB;
-            color: #FFF;
+            background: @muted-color;
+            color: #fff;
         }
 
-        a.read_more, a.comments_btn {
+        a.read_more {
             font-size: 14px;
             font-weight: 800;
             padding: 10px 20px;
-            color: #007EE5;
-            background: #FFF;
-            border: 1px solid #007EE5;
+            color: @link-color;
+            background: #fff;
+            border: 1px solid @link-color;
         }
 
-        a.read_more:hover, a.comments_btn:hover {
-            color: #FFF;
-            background: #007EE5;
+        a.read_more:hover {
+            color: #fff;
+            background: @link-color;
         }
     }
 }
@@ -175,7 +177,7 @@ article {
         padding: 40px 0 0 0;
         margin: 0 0 40px 0;
         height: 10px;
-        border-bottom: solid 1px #CCC;
+        border-bottom: solid 1px #ccc;
     }
 
     .pagination {
@@ -192,16 +194,16 @@ article {
 
         a {
             display: inline-block;
-            border: 2px solid #007EE5;
+            border: 2px solid #007ee5;
             margin: 0 5px;
             padding: 8px 20px;
             font-weight: bold;
-            color: #007EE5;
+            color: @link-color;
         }
 
         a:hover {
-            color: #FFF;
-            background: #007EE5;
+            color: #fff;
+            background: @link-color;
         }
     }
 }
@@ -212,23 +214,19 @@ article {
     h2:before {
         content: "# ";
         font-weight: bold;
-        color: #DDD;
+        color: @muted-color;
     }
 
     h3:before {
         content: "## ";
         font-weight: bold;
-        color: #DDD;
+        color: @muted-color;
     }
 
     h4:before {
         content: "### ";
         font-weight: bold;
-        color: #DDD;
-    }
-
-    #disqus_thread {
-        max-width: 100%;
+        color: @muted-color;
     }
 
     article {
@@ -256,13 +254,11 @@ article {
             }
 
             span {
-                font-family: sans-serif;
-                text-transform: uppercase;
                 text-align: right;
                 float: right;
                 padding-top: 3px;
                 font-size: 12px;
-                color: #999;
+                color: @muted-color;
             }
         }
     }
