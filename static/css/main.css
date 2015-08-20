@@ -42,7 +42,7 @@ article header h1 {
 article header time {
   color: #aaaaaa;
   font-size: 0.85em;
-  text-align: center;
+  float: right;
 }
 article p {
   font-size: 16px;
