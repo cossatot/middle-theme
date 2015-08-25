@@ -26,17 +26,8 @@
                         {% if ABOUT_PAGE %}
                             <li><a href="{{ ABOUT_PAGE }}" title="About">About Me</a></li>
                         {% endif %}
-                        {% if TWITTER_USERNAME %}
-                            <li><a href="https://twitter.com/{{ TWITTER_USERNAME }}" title="@{{ TWITTER_USERNAME }} on Twitter" rel="me">Twitter</a></li>
-                        {% endif %}
-                        {% if GITHUB_USERNAME %}
-                            <li><a href="https://github.com/{{ GITHUB_USERNAME }}" title="@{{ GITHUB_USERNAME }} on Github" rel="me">Github</a></li>
-                        {% endif %}
                         {% if SHOW_ARCHIVES %}
-                            <li><a href="{{ SITEURL }}/archives.html" title="Archive">Archive</a></li>
-                        {% endif %}
-                        {% if SHOW_FEED %}
-                            <li><a href="{{ SITEURL }}/feeds/all.atom.xml" title="Feed">Feed</a></li>
+                            <li><a href="{{ SITEURL }}/archives.html" title="Archive of Entries">Archive</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -45,5 +36,8 @@
         {% block content %}{% endblock %}
 
         <style type="text/css">{% include 'ipynb.css' %}</style>
+        <footer role="contentinfo">
+            {% include 'footer.html' %}
+        </footer>
     </body>
 </html>
