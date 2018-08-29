@@ -8,10 +8,13 @@
         <meta name="viewport" content="width=device-width">
         <title>{% block title %}{% endblock %} | {{ SITENAME }}</title>
         <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} Atom Feed" href="{{ SITEURL }}/feeds/all.atom.xml" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!--        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+-->
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments.css">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.css">
-        <script src="//use.edgefonts.net/source-sans-pro:n3,i3,n4,i4.js"></script>
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap.min.css">
+<!--        <script src="//use.edgefonts.net/source-sans-pro:n3,i3,n4,i4.js"></script>
+-->
         {% block extra_head %}{%endblock%}
     </head>
 

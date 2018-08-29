@@ -3,7 +3,7 @@ body {
   padding: 0;
   font: 15px 'Source-Sans-Pro', sans-serif;
   line-height: 1.6em;
-  color: #222222;
+  color: #222;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -16,16 +16,16 @@ a:hover {
   text-decoration: none;
 }
 header.main-header {
-  background: none repeat scroll 0% 0% #333333;
+  background: none repeat scroll 0% 0% #333;
 }
 header.main-header a {
-  color: #ffffff;
+  color: #fff;
 }
 header.main-header .container {
   max-width: 1000px;
 }
 header.main-header .container nav a:hover {
-  background-color: #333333;
+  background-color: #333;
 }
 header.main-header .container .navbar-brand {
   font-variant: small-caps;
@@ -40,10 +40,10 @@ article header {
 article header h1 {
   margin-bottom: 2px;
   font-weight: 700;
-  color: #000000;
+  color: #000;
 }
 article header time {
-  color: #aaaaaa;
+  color: #aaa;
   font-size: 0.85em;
   float: right;
 }
@@ -66,7 +66,7 @@ article a:hover {
 }
 article blockquote {
   border-left: 2px solid #c7c7cc;
-  color: #aaaaaa;
+  color: #aaa;
   margin: 30px 0;
   padding: 0 0 0 25px;
 }
@@ -74,9 +74,9 @@ article img {
   max-width: 100%;
 }
 article code {
-  color: #333333;
+  color: #333;
   background-color: #f5f5f5;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   border-radius: 0;
   font-size: 13px;
 }
@@ -103,23 +103,23 @@ article .meta a.tag {
   text-transform: uppercase;
   font-weight: 800;
   font-size: 11px;
-  color: #aaaaaa;
-  border: 1px solid #bbbbbb;
+  color: #aaa;
+  border: 1px solid #bbb;
 }
 article .meta a.tag:hover {
-  background: #aaaaaa;
-  color: #ffffff;
+  background: #aaa;
+  color: #fff;
 }
 article .meta a.read_more {
   font-size: 14px;
   font-weight: 800;
   padding: 10px 20px;
   color: #bc0031;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #bc0031;
 }
 article .meta a.read_more:hover {
-  color: #ffffff;
+  color: #fff;
   background: #bc0031;
 }
 .index {
@@ -131,7 +131,7 @@ article .meta a.read_more:hover {
   font-weight: 700;
 }
 .index article header h2 a {
-  color: #000000;
+  color: #000;
 }
 .index article header h2 a:hover {
   color: #bc0031;
@@ -141,7 +141,7 @@ article .meta a.read_more:hover {
   padding: 40px 0 0 0;
   margin: 0 0 40px 0;
   height: 10px;
-  border-bottom: solid 1px #cccccc;
+  border-bottom: solid 1px #ccc;
 }
 .index .pagination {
   display: block;
@@ -162,26 +162,23 @@ article .meta a.read_more:hover {
   color: #bc0031;
 }
 .index .pagination a:hover {
-  color: #ffffff;
+  color: #fff;
   background: #bc0031;
 }
 .post {
   max-width: 700px;
 }
 .post h2:before {
-  content: "# ";
   font-weight: bold;
-  color: #aaaaaa;
+  color: #aaa;
 }
 .post h3:before {
-  content: "## ";
   font-weight: bold;
-  color: #aaaaaa;
+  color: #aaa;
 }
 .post h4:before {
-  content: "### ";
   font-weight: bold;
-  color: #aaaaaa;
+  color: #aaa;
 }
 .post article .meta {
   margin: 50px 0 100px;
@@ -207,5 +204,5 @@ article .meta a.read_more:hover {
   float: right;
   padding-top: 3px;
   font-size: 12px;
-  color: #aaaaaa;
+  color: #aaa;
 }
