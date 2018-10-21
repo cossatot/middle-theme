@@ -48,18 +48,116 @@
 
     <script>
 
-       var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+        var map = L.map("mapid").setView([10, 27.5], 4);
+        
+        map.createPane("labels");
+        map.getPane("labels").style.zIndex = 650;
+        map.getPane("labels").style.pointerEvents = "none";
 
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox.streets'
-	}).addTo(mymap);
+        // basemap stuff
+
+        var basemaps = {
+            GMRT: L.tileLayer.wms("https://www.gmrt.org/services/mapserver/wms_merc?request=GetCapabilities&service=WMS&version=1.3.0", {
+              layers: 'topo',
+              attribution: '©GRMT'
+            }),
+            
+            
+            OpenMapSurfer_Roads : L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+            	maxZoom: 20,
+            	attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }),
+        };
+
+        var human_basemaps = {
+            "CartoDB OSM": L.tileLayer("http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png", {
+                attribution: '©OpenStreetMap, ©CartoDB',
+                opacity: 0.7
+            }),
+
+            cartoLabels: L.tileLayer("http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png", {
+                attribution: '©OpenStreetMap, ©CartoDB',
+                pane: "labels"
+            })
+        };
+
+
+
+
+        map_data_dir = "../../map_data/" + "{{ page.acronym }}" + "/"
+        contour_gj_loc = map_data_dir + "pga_10_50_contours_filled.geojson"
+        fault_poly_gj_loc = map_data_dir + "fault_polys.geojson"
+
+        const pga_contours = fetch(contour_gj_loc);
+        const faults = fetch(fault_poly_gj_loc);
+
+
+        var pgaLayer = L.geoJSON();
+        var faultLayer = L.geoJSON();
+
+        pga_contours
+            .then(pga_data => pga_data.json())
+            .then(data => {
+                var pgaLayer = L.geoJSON(data, {
+                    style: function(feature) {
+                        return {
+                            color: feature.properties.fill,
+                            fillColor: feature.properties.fill,
+                            fillOpacity: 0.3
+                        }
+                    },
+
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup( feature.properties.title+"g")
+                    }
+                })
+
+                var overlays = {"CartoDB OSM": human_basemaps["CartoDB OSM"]}
+
+                var sourceLayers = {
+                    "Fault Sources": faultLayer,
+                    "PGA (10% exceedence in in 50 years)": pgaLayer
+                    }
+
+                L.control.layers(basemaps,
+                                 sourceLayers).addTo(map);
+                basemaps.GMRT.addTo(map);
+                //pgaLayer.addTo(map);
+                human_basemaps.cartoLabels.addTo(map);
+            })
+            .then(function(response) {
+                return fetch(fault_poly_gj_loc)
+            })
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                // Plot the faults
+                //console.log(data)
+                var faultLayer = L.geoJSON(data, {
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup("ID: "+feature.properties.id)
+                    }
+                })
+                /*
+                var overlays = {"CartoDB OSM": human_basemaps["CartoDB OSM"]}
+
+                var sourceLayers = {
+                    "Fault Sources": faultLayer,
+                    "PGA (10% exceedence in in 50 years)": pgaLayer
+                    }
+
+                L.control.layers(basemaps,
+                                 sourceLayers).addTo(map);
+                basemaps.GMRT.addTo(map);
+                //pgaLayer.addTo(map);
+                human_basemaps.cartoLabels.addTo(map);
+                */
+            })
+            .catch(err => console.log(err));
+
 
     </script>
-        
 
     </article>
 </div>
