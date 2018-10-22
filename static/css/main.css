@@ -123,7 +123,7 @@ article .meta a.read_more:hover {
   background: #bc0031;
 }
 .index {
-  max-width: 700px;
+  max-width: 1200px;
 }
 .index article header h2 {
   font-size: 36px;
@@ -166,7 +166,7 @@ article .meta a.read_more:hover {
   background: #bc0031;
 }
 .post {
-  max-width: 700px;
+  max-width: 1200px;
 }
 .post h2:before {
   font-weight: bold;
@@ -184,7 +184,7 @@ article .meta a.read_more:hover {
   margin: 50px 0 100px;
 }
 .list {
-  max-width: 700px;
+  max-width: 1200px;
 }
 .list ul.double-list {
   margin: 0 auto 60px;

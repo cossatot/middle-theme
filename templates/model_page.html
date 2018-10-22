@@ -81,24 +81,12 @@
             })
         };
 
-
-
-
         map_data_dir = "../../map_data/" + "{{ page.acronym }}" + "/"
         contour_gj_loc = map_data_dir + "pga_10_50_contours_filled.geojson"
         fault_poly_gj_loc = map_data_dir + "fault_polys.geojson"
 
-        const pga_contours = fetch(contour_gj_loc);
-        const faults = fetch(fault_poly_gj_loc);
 
-
-        var pgaLayer = L.geoJSON();
-        var faultLayer = L.geoJSON();
-
-        pga_contours
-            .then(pga_data => pga_data.json())
-            .then(data => {
-                var pgaLayer = L.geoJSON(data, {
+        var pgaLayer = L.geoJSON(null, {
                     style: function(feature) {
                         return {
                             color: feature.properties.fill,
@@ -108,53 +96,33 @@
                     },
 
                     onEachFeature: function(feature, layer) {
-                        layer.bindPopup( feature.properties.title+"g")
+                        layer.bindPopup( feature.properties.title + " g")
                     }
-                })
+                });
+            
+        var faultLayer = L.geoJSON();
 
-                var overlays = {"CartoDB OSM": human_basemaps["CartoDB OSM"]}
+        async function getGeoData(url) {
+            let response = await fetch(url);
+            let data = await response.json();
+            return data;
+        }
 
-                var sourceLayers = {
-                    "Fault Sources": faultLayer,
-                    "PGA (10% exceedence in in 50 years)": pgaLayer
-                    }
+        getGeoData(contour_gj_loc).then(data => pgaLayer.addData(data)) 
+        getGeoData(fault_poly_gj_loc).then(data => faultLayer.addData(data)) 
+        
+        var overlays = {"CartoDB OSM": human_basemaps["CartoDB OSM"]}
 
-                L.control.layers(basemaps,
-                                 sourceLayers).addTo(map);
-                basemaps.GMRT.addTo(map);
-                //pgaLayer.addTo(map);
-                human_basemaps.cartoLabels.addTo(map);
-            })
-            .then(function(response) {
-                return fetch(fault_poly_gj_loc)
-            })
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
-                // Plot the faults
-                //console.log(data)
-                var faultLayer = L.geoJSON(data, {
-                    onEachFeature: function(feature, layer) {
-                        layer.bindPopup("ID: "+feature.properties.id)
-                    }
-                })
-                /*
-                var overlays = {"CartoDB OSM": human_basemaps["CartoDB OSM"]}
+        var sourceLayers = {
+            "Fault Sources": faultLayer,
+            "PGA (10% exceedence in in 50 years)": pgaLayer
+            }
 
-                var sourceLayers = {
-                    "Fault Sources": faultLayer,
-                    "PGA (10% exceedence in in 50 years)": pgaLayer
-                    }
-
-                L.control.layers(basemaps,
-                                 sourceLayers).addTo(map);
-                basemaps.GMRT.addTo(map);
-                //pgaLayer.addTo(map);
-                human_basemaps.cartoLabels.addTo(map);
-                */
-            })
-            .catch(err => console.log(err));
+        L.control.layers(basemaps,
+                         sourceLayers).addTo(map);
+        basemaps.GMRT.addTo(map);
+        //pgaLayer.addTo(map);
+        human_basemaps.cartoLabels.addTo(map);
 
 
     </script>
