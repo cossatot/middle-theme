@@ -84,6 +84,7 @@
         map_data_dir = "../../map_data/" + "{{ page.acronym }}" + "/"
         contour_gj_loc = map_data_dir + "pga_10_50_contours_filled.geojson"
         fault_poly_gj_loc = map_data_dir + "fault_polys.geojson"
+        gridded_seis_gj_loc = map_data_dir + "gridded_seis.geojson"
 
 
         var pgaLayer = L.geoJSON(null, {
@@ -101,6 +102,18 @@
                 });
             
         var faultLayer = L.geoJSON();
+        var gridSeisLayer = L.geoJSON(null, {
+            style: function(feature) {
+                return {
+                    color: feature.properties.color,
+                    fillColor: feature.properties.color,
+                    fillOpacity: 0.3
+                }
+            },
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup( feature.properties.mo+" N m / yr")
+            }
+        });
 
         async function getGeoData(url) {
             let response = await fetch(url);
@@ -108,9 +121,6 @@
             return data;
         }
 
-        getGeoData(contour_gj_loc).then(data => pgaLayer.addData(data)) 
-        getGeoData(fault_poly_gj_loc).then(data => faultLayer.addData(data)) 
-        
         var overlays = {"CartoDB OSM": human_basemaps["CartoDB OSM"]}
 
         var sourceLayers = {
@@ -124,6 +134,10 @@
         //pgaLayer.addTo(map);
         human_basemaps.cartoLabels.addTo(map);
 
+        getGeoData(contour_gj_loc).then(data => pgaLayer.addData(data)) 
+        getGeoData(fault_poly_gj_loc).then(data => faultLayer.addData(data)) 
+        getGeoData(gridded_seis_gj_loc).then(data => faultLayer.addData(data)) 
+        
 
     </script>
 
